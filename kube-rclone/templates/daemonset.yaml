@@ -27,8 +27,8 @@ spec:
           - cp
         args:
           - -v
-          - /in/rclone.conf
-          - /out/rclone.conf
+          - /in/{{ .Values.rclone.confName }}
+          - /out/{{ .Values.rclone.confName }}
         volumeMounts:
         - name: config-data
           mountPath: /in
@@ -42,7 +42,7 @@ spec:
           - mount
           - "{{ .Values.rclone.remote }}"
           - {{ .Values.rclone.path }}
-          - --config=/etc/rclone/rclone.conf
+          - --config=/etc/rclone/{{ .Values.rclone.confName }}
           - --allow-non-empty
           - --allow-other
         {{- if .Values.rclone.readOnly }}
